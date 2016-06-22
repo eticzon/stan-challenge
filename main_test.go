@@ -79,11 +79,9 @@ func TestIndexHandlerOtherRequests(t *testing.T) {
 		method, endpoint string
 		expectedStatus   int
 	}{
-		{"GET", "/", http.StatusMethodNotAllowed},
-		{"GET", "/foo", http.StatusMethodNotAllowed},
-		{"PUT", "/", http.StatusMethodNotAllowed},
-		{"PUT", "/foo", http.StatusMethodNotAllowed},
-		{"DELETE", "/", http.StatusMethodNotAllowed},
+		{"GET", "/foo", http.StatusForbidden},
+		{"PUT", "/foo", http.StatusForbidden},
+		{"DELETE", "/foo", http.StatusForbidden},
 		{"POST", "/foo", http.StatusForbidden},
 	}
 	for _, tc := range cases {

@@ -78,10 +78,6 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	// Use a simple routing scheme here
 	//
 	// TODO: Upgrade to a proper or more robust route handling mechanism
-	if r.Method != "POST" {
-		http.Error(w, "Unsupported operation", http.StatusMethodNotAllowed)
-		return
-	}
 	if r.URL.Path != "/" {
 		http.Error(w, "Unsupported endpoint", http.StatusForbidden)
 		return
