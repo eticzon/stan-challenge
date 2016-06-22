@@ -23,7 +23,7 @@ func readFixture(t *testing.T, f string) string {
 // TestIndexHandlerPut tests against valid and invalid PUT request cases by loding from fixed set
 // of test fixtures. Each test case loads the mock request payload and expected response from
 // "golden" files on disk.
-func TestIndexHandlerPutRequest(t *testing.T) {
+func TestIndexHandlerPostRequest(t *testing.T) {
 	cases := []struct {
 		desc, fixture string
 		isValid       bool
@@ -50,7 +50,7 @@ func TestIndexHandlerPutRequest(t *testing.T) {
 		}
 
 		payload := readFixture(t, filepath.Join(fixturesDir, inputPath))
-		req, err := http.NewRequest("PUT", "/", strings.NewReader(payload))
+		req, err := http.NewRequest("POST", "/", strings.NewReader(payload))
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -81,10 +81,10 @@ func TestIndexHandlerOtherRequests(t *testing.T) {
 	}{
 		{"GET", "/", http.StatusMethodNotAllowed},
 		{"GET", "/foo", http.StatusMethodNotAllowed},
-		{"POST", "/", http.StatusMethodNotAllowed},
-		{"POST", "/foo", http.StatusMethodNotAllowed},
+		{"PUT", "/", http.StatusMethodNotAllowed},
+		{"PUT", "/foo", http.StatusMethodNotAllowed},
 		{"DELETE", "/", http.StatusMethodNotAllowed},
-		{"PUT", "/foo", http.StatusForbidden},
+		{"POST", "/foo", http.StatusForbidden},
 	}
 	for _, tc := range cases {
 		req, err := http.NewRequest(tc.method, tc.endpoint, nil)

@@ -78,7 +78,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	// Use a simple routing scheme here
 	//
 	// TODO: Upgrade to a proper or more robust route handling mechanism
-	if r.Method != "PUT" {
+	if r.Method != "POST" {
 		http.Error(w, "Unsupported operation", http.StatusMethodNotAllowed)
 		return
 	}
