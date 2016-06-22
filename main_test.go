@@ -65,6 +65,11 @@ func TestIndexHandlerPostRequest(t *testing.T) {
 			t.Errorf(format, tc.desc, status, expectedStatus)
 		}
 
+		if MIMEType := rr.Header().Get(contentTypeHdr); MIMEType != strJSONMIME {
+			format := "Handler returned wrong content type. Test case: \"%v\"\nActual: %v, Expected: %v"
+			t.Errorf(format, tc.desc, MIMEType, strJSONMIME)
+		}
+
 		expectedBody := readFixture(t, filepath.Join(fixturesDir, goldenPath))
 		if rr.Body.String() != string(expectedBody) {
 			format := "Handler returned wrong status response body. Test case: \"%v\"\nActual: %v\nExpected: %v"

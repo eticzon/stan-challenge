@@ -88,12 +88,14 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
+
 	if err := json.Unmarshal(body, &payload); err != nil {
 		w.Header().Set(contentTypeHdr, strJSONMIME)
 		w.WriteHeader(http.StatusBadRequest)
 		io.WriteString(w, errParseJSON)
 		return
 	}
+
 	resp := map[string]interface{}{
 		"response": filterShows(&payload),
 	}
@@ -101,6 +103,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
+	w.Header().Set(contentTypeHdr, strJSONMIME)
 	w.WriteHeader(http.StatusOK)
 	w.Write(data)
 }
