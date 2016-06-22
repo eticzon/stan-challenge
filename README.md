@@ -4,34 +4,36 @@ My solution to https://challengeaccepted.streamco.com.au/.
 
 ## Setup
 
-The app is a standalone binary which can be compiled and run via (assuming you're in the project directory):
+The app is a standalone binary and doesn't require/vendor in any third-party dependencies.
+All things `stdlib` bru! :)
+
+To build and run via (assuming you're in the project directory):
 
 ```sh
 $ make test
+$ make build
 $ bin/stan-challenge
 ```
 
-This will start an HTTP server listening on `localhost:80`.
+That will start HTTP server which will bind/listen on `0.0.0.0:8080` (default port).
+
+The default port can also be overridden with an environment variable `PORT`.
+
+```sh
+$ PORT=5000 bin/stan-challenge
+```
 
 ## Heroku Deployment
 
 Everything that is required to get this app deployed to [Heroku](https://www.heroku.com/) is already in-place. 
-Refer to [Deploying Go Apps on Heroku](https://devcenter.heroku.com/articles/deploying-go for the) for the details.
-
-A sample app has been deployed to http://stan-challenge-solution.herokuapp.com
+Refer to [Deploying Go Apps on Heroku](https://devcenter.heroku.com/articles/deploying-go for the) for details.
 
 ## Running Tests
 
-Tests are written with standard go tooling.
+Tests are written with standard [Go](https://golang.org/) tooling.
 
 ```sh
 $ make test
-```
-
-Generating coverage reports:
-
-```sh
-$ make cover
 ```
 
 ## Author(s)
