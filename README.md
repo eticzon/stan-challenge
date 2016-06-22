@@ -4,10 +4,16 @@ My solution to https://challengeaccepted.streamco.com.au/.
 
 ## Setup
 
+To setup dev dependencies, `cd` to the project directory and run:
+
+```sh
+make setup
+```
+
 The app is a standalone binary and doesn't require/vendor in any third-party dependencies.
 All things `stdlib` bru! :)
 
-To build and run via (assuming you're in the project directory):
+To build and run:
 
 ```sh
 $ make test
