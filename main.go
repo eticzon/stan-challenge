@@ -17,10 +17,10 @@ const (
 
 // Simple setup for passing different log.Logger configurations.
 var (
-	Trace   *log.Logger
-	Info    *log.Logger
-	Warning *log.Logger
-	Error   *log.Logger
+	logTrace *log.Logger
+	logInfo  *log.Logger
+	logWarn  *log.Logger
+	logError *log.Logger
 
 	appPort = "8080"
 )
@@ -108,10 +108,10 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 func init() {
 	flags := log.Ldate | log.Ltime | log.Lshortfile
 
-	Trace = log.New(ioutil.Discard, "TRACE: ", flags)
-	Info = log.New(os.Stdout, "INFO: ", flags)
-	Warning = log.New(os.Stdout, "WARNING: ", flags)
-	Error = log.New(os.Stderr, "ERROR: ", flags)
+	logTrace = log.New(ioutil.Discard, "TRACE: ", flags)
+	logInfo = log.New(os.Stdout, "INFO: ", flags)
+	logWarn = log.New(os.Stdout, "WARNING: ", flags)
+	logError = log.New(os.Stderr, "ERROR: ", flags)
 
 	if os.Getenv("PORT") != "" {
 		appPort = os.Getenv("PORT")
@@ -119,7 +119,7 @@ func init() {
 }
 
 func main() {
-	http.Handle("/", Adapt(http.HandlerFunc(indexHandler), AddHeader(XHeader, XValue), Recover(Error)))
+	http.Handle("/", Adapt(http.HandlerFunc(indexHandler), AddHeader(XHeader, XValue), Recover(logError)))
 	log.Printf("Starting server on port %v...\n", appPort)
 	log.Fatal(http.ListenAndServe(":"+appPort, nil))
 }
