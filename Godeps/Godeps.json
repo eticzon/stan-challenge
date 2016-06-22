@@ -1,0 +1,6 @@
+{
+	"ImportPath": "github.com/eticzon/stan-challenge",
+	"GoVersion": "go1.6",
+	"GodepVersion": "v74",
+	"Deps": []
+}

@@ -1,0 +1,19 @@
+# Compiled Object files, Static and Dynamic libs (Shared Objects)
+*.o
+*.a
+*.so
+.DS_Store
+Thumbs.db
+
+# Folders
+_obj
+_test
+
+# App-specific
+bin/
+vendor/
+/stan*
+
+# Editors
+*~
+.*.swp
